@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/decryptMailAdresses.js"></script>-->
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<style>
+			ul li {
+				margin-top: 20px !important; 
+			} 
+
+			table {
+				margin-top: 20px !important;
+				border: 3px solid grey !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>REST</h1><br>&<br><br><h1>RESTful HTTP</h1>
+					<br><br>
+					<h3>Begriffe, Konzept und Best Practice</h3>
+					<p>
+						<small>Florian Loch, 18.11.2013</script></small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Herkunft, & wichtige Eigenschaften</h3>
+					<ul>
+						<li><i>Representational State Transfer</i>
+						<li>Ein Architekturstil f&uuml;r Integrationsszenarien, keine Implementierung
+						<li>Entworfen von Roy Fielding im Jahr 2000
+						<li>Verkn&uuml;pfung von Systemen durch &bdquo;Lose Kopplung&ldquo;, sprich Datenaustausch
+						<li>Alternative zu (propriet&auml;ren) L&ouml;sungen via Sockets, Named Pipes oder Shared Memory
+						<li>Anfangs recht unbeachtet erlebt REST durch WebAPIs Konjunktur
+						<li>REST schreibt kein Dateiformat f&uuml;r den Datenaustausch vor
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Fielding wollte mit seiner Dissertation mit dem Namen &bdquo;HTTP-Object-Model&ldquo;dem Web eine neue theoretische Basis geben, da der Grundsatz von statischen Seiten mit eindeutigen Indikatoren durch dynamisch errechnete/generierte Inhalte immer mehr verwischt wurde
+							<li>REST ist eine abstrakte Ebene oberhalb einer jeden Implementierung (Daher nicht, wie gern getan, zu vergleichen mit Systemen wie SOAP, welches eine konkrete Implementierung darstellt)
+							<li>Alternative, mehr oder weniger verbreitete Standards, sind bspw. RMI, CORBA, RFC sowie diverse andere Systeme welche via Sockets und eigenen Protokollen, Named Pipes oder Shared Memory agieren
+							<li>Zu eng gekoppelte Systeme werden de facto zu &bdquo;einem&ldquo; System
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>HTTP</h3>
+					<ul>
+						<li><strong>Hypertext Transfer Protocol</strong>
+						<li>&bdquo;Motor des Webs&ldquo;
+						<li>Ab 1989 von Roy Fielding und Tim Berners-Lee entwickelt
+						<li>Aufgeteilt in <strong>Header</strong> und <strong>Body</strong>
+						<li>Header besteht aus Feldern (Key-Value-Paare)
+						<li>Body enth&auml;lt Nachricht (bspw. auch HTTP-Post-Parameter)
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Wirklich nur ganz kurz angerissen...
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>REST + HTTP = RESTful HTTP</h3>
+					<ul>
+						<li>HTTP bietet sich an, da...
+						<ul>
+							<li>Eine uniforme, offene Schnittstelle
+							<li>Ungeschlagene Interoperabilit&auml;t, da durch jede bedeutende Plattform und Sprache unterst&uuml;tzt
+							<li>Protokoll effizient, optimierte Clients (Caching, Komprimierung etc.)
+							<li>Skaliert sehr gut (da zustandslos)
+							<li>Last but not Least: REST Vorgaben passen perfekt auf HTTP
+						</ul></li>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Theoretisch schreibt REST nicht die Verwendung von HTTP als darunterliegendes Protokoll vor - es empfiehlt sich jedoch aus vielen Gr&uuml;nden. Des Weiteren schwebte Fielding sicher die Implementierung durch HTTP vor; diesen Schluss l&auml;sst bereits der Titel seiner Dissertation zu. Zudem wollte man die technologische Hochleistung des WWW auch in anderen Bereichen der Datenverarbeitung nutzen.
+							<li>Sollte eine Sprache oder Plattform HTTP nicht unterst&uuml;tzen, so w&auml;re die Implementierung auf einem Bestehende TCP/IP-Stack mit vertretbarem Aufwand m&ouml;glich
+							<li>Skaliert sehr gut; da keine sitzungsbezogenen Daten im Arbeitsspeicher des Servers gehalten werden m&uuml;ssen k&ouml;nnen nachfolgende Anfragen eines Clients auch von anderen Servern beantwortet werden (ohne, dass diese mit dem ersten Server in Verbindung stehen m&uuml;ssten).
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Zentrales Konzept: Ressourcen</h3>
+					<ul>
+						<li>Eindeutige Identifizierung (sp&auml;ter mehr dazu)
+						<li>Ressourcen sind eine Abstrakte Instanzen, die Daten &bdquo;beinhalten&ldquo;
+						<li>Werden durch <strong>Repr&auml;sentationen</strong> (Darstellungsform/Format) dargestellt
+						<li>Man sieht nie die Ressource selbst sondern immer nur eine Repr&auml;sentation dieser
+						<li>Jede Ressource hat mindestens eine Repr&auml;sentation
+					</ul>
+				</section>
+
+
+				<section>
+					<h3>Die verschiedenen Ressourcen (1/2)</h3>
+					<ul>
+						<li>Prim&auml;rressourcen: offensichtliche, persistierte Entit&auml;ten (i. d. R. ein Substantiv)
+						<li>Subressourcen: Teil von P.-Res., der auch eigenst&auml;ndig stehen k&ouml;nnte
+						<li>Listenressourcen: Array von Instanzen einer Ressource bzw. deren Repr&auml;sentation
+						<ul>
+							<li>Filter: eingeschr&auml;nkte/eingegrenzte Liste
+							<li>Paginierungen
+						</ul>
+						<li>Projektionen: Beschr&auml;nkung bzgl. der Attribute einer Ressource; nicht anhand dieser wie die Filter
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Beispiel Subressource: Eine Lieferadresse innerhalb der Ressource &bdquo;Bestellung&ldquo; k&ouml;nnte auch einzeln als Ressource &bdquo;Adresse&ldquo; bestehen. 
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Die verschiedenen Ressourcen (2/2)</h3>
+					<ul>
+						<li>Aggregationen: Zusammenfassung mehrerer Attributsmengen einer Ressource; nicht von Instanzen wie eine Liste
+						<li>Aktivit&auml;ten: Ressourcen, deren Notwendigkeit sich aus Prozessen/Aktivit&auml;ten bzw. deren Ablauf ergibt
+						<li>Konzeptressourcen: Keine wahre Identit&auml;t dahinter, sondern nur Verweise bzw. &uuml;ber Verweise bezogene Daten (&bdquo;303 see other&ldquo;)
+					</ul>
+				</section>
+
+
+				<section>
+					<h1>Die 5 Kernprinzipien von REST</h1>
+					<p>Identifikation, Hypermedia, Standardmethoden, Repr&auml;sentationen, Statuslose Kommunikation</p>
+					
+					<aside class="notes">
+						<ul>
+							<li>Ich habe den Vorgriff zu RESTful HTTP gemacht, um nun direkte Umsetzung in HTTP einf&uuml;hren zu k&ouml;nnen
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Eindeutige Identifikation</h3>
+					<ul>
+						<li>Jede Ressource (&auml;hnlich einem Entit&auml;tstyp) wird eindeutig mit einer <strong>URI</strong> identifiziert
+						<ul>
+							<li>Globales System, welches weltweit einzigartige IDs garantiert
+							<li>URIs sind auch f&uuml;r nicht technikaffine Menschen verst&auml;ndlich und zu behalten
+							<li>Erm&ouml;glicht Hierachie
+							<li>Sieht bereits Notationen f&uuml;r Filter und Selektionen vor
+							<li>Hinter einer Identifikation steht genau eine Ressource; Es kann allerdings hinter mehreren URIs dieselbe Ressource stehen
+						</ul>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>URI: &bdquo;Universal Ressource Identifier&ldquo;, auch dazu sp&auml;ter mehr.
+							<li>
+						</ul>
+					</aside>
+				</section>	
+
+
+				<section>
+					<h3>Verkn&uuml;pfungen / Hypermedia</h3>
+					<ul>
+						<li>Grundidee des Internets: Verkn&uuml;pfungen zwischen Dokumenten
+						<li>Eine Ressource kann direkt auf andere Verweisen
+						<li>Steuerung des Applikationsflusses (Server kann Client m&ouml;gliche Schritte, in Form von URIs, mitsenden)
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Client kann zu Daten einer Ressource &uuml;ber Verkn&uuml;pfungen weitere Informationen von anderen Ressourcen beziehen. Bspw. eine Liste aller Eink&auml;ufe eines Kunden, welche auf die Ressource &bdquo;Artikel&ldquo; verweist.
+							<li>Client kann sich so auch von Server steuern lassen
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Standardmethoden (HTTP-Verben / CRUD) (1/2)</h3>
+					<ul>
+						<li>Jede Ressource &bdquo;implementiert&ldquo; alle Methoden
+					</ul>
+					<table>
+						<tr>
+							<th>HTTP-Verb</th><th>Operation</th><th>Safe?</th>
+						</tr>
+						<tr>
+							<td>DELETE</td><td>Entfernen einer Identit&auml;t</td><td>Ja</td>
+						</tr>
+						<tr>
+							<td>GET</td><td>Abrufen von Daten einer Ressource bzw. Identit&auml;t</td><td>Ja</td>
+						</tr>
+						<tr>
+							<td>POST</td><td>Anlegen einer Identit&auml;t, starten beliebiger Operationen</td><td>Nein</td>
+						</tr>
+						<tr>
+							<td>PUT</td><td>Aktualisieren einer Identit&auml;t</td><td>Ja</td>
+						</tr>																		
+					</table>
+
+					
+					<aside class="notes">
+						<ul>
+							<li><strong>CRUD</strong>: Create, Read, Update, Delete
+							<li>Jede Ressource implementiert jede Methode gibt Sicherheit; wie in OO-Programmierung die Implementierung eines Interfaces
+							<li>Daneben gibt es noch die HTTP-Verben HEAD, TRACE, CONNECT und OPTIONS, diese sind jedoch f&uuml;r REST nur von geringer Bedeutung.
+							<li>&bdquo;Safe&ldquo; meint, dass die Methoden idempotent sind, d. h., dass ein (versehentlich) mehrfacher Aufruf keine Folgen hat
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Standardmethoden (HTTP-Verben / CRUD) (2/2)</h3>
+					<ul>
+						<li>Bei PUT sollten korrekterweise <i>alle</i> Daten gesendet werden; in der Praxis jedoch eher un&uuml;blich
+						<li>Aufrufe von PUT, POST liefern Antwort mit entsprechendem HTTP-Status (200 bzw. 201) und den kompletten Daten der erstellten/ge&auml;nderten Indentit&auml;t (wie bei GET)
+					</ul>
+
+					
+					<aside class="notes">
+						<ul>
+						</ul>
+					</aside>
+				</section>				
+
+
+				<section>
+					<h3>Unterschiedliche Repr&auml;sentationen</h3>
+					<ul>
+						<li>REST schreibt kein Dateiformat vor
+						<li>Daten einer Ressource k&ouml;nnen in verschiedenen Repr&auml;sentationen vorliegen
+						<li>Aushandlung des Formats durch &bdquo;HTTP Content Negotiation&ldquo;<br>
+						<code>...<br>
+						Accept: text/xml, text/html<br>
+						...</code>
+						<li>Durch verschiedene Repr&auml;sentationen bessere/flexiblere Unterst&uuml;tzung von Clients
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Genau genommen bekommt man die Ressource nie zu Gesicht - sondern immer nur eine ihrer (m&ouml;glicherweise vielen) Repr&auml;sentationen.
+							<li>Content Negotiation ist fester Teil des HTTP-Headers. Der Client sendet an den Server mit, in welchem Dateiformat er gerne eine Antwort h&auml;tte - ist dies f&uuml;r den Server im Bereich des M&ouml;glichen entspricht er dieser Bitte, ansonsten sendet er in einem Format seiner Wahl.
+							<li>Bspw. ist die Kombination von XML und JSON für die verschiedenen Phasen der Client-Entwicklung n&uuml;tzlich: XML f&uuml;r Entwicklung und Debugging da f&uuml;r Menschen, dazu z&auml;hlen Entwickler angeblich auch, besser lesbar. F&uuml;r Betrieb JSON, da weniger Overhead. 
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Statuslose Kommunikation</h3>
+					<ul>
+						<li>Zustand wird entweder von Client gehalten (bspw. in URI), oder von Server in Ressourcenstatus umgewandelt<br>
+						<code>Bestellung: <u>id</u>, #kunde_id, abgeschlossen</code>
+						<li>Warum keine &bdquo;nativen&ldquo; Sessions?
+						<ul>
+							<li>Prinzip der losen Bindung zwischen Client und Server
+							<li>Skalierbarkeit des Systems
+						</ul>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Server beh&auml;lt Status des Prozesses nicht im RAM; bzw. nachfolgende Anfragen werden nicht zwingend vom selben Server beantwortet. Entweder h&auml;lt der Client den Status (in RAM oder ROM), oder der Server wandelt ihn in einen Ressourcenstatus, sprich er vermerkt innerhalb der Ressource den Stand des Prozesses. Nat&uuml;rlich sind auch andere Verfahren zur serverseitigen Persistierung denkbar. Die clientseitige L&ouml;sung birgt die Gefahr einer Manipulation des Status und damit des Prozessablaufes.
+						</ul>
+					</aside>
+				</section>		
+
+				<section>
+					<h3>URIs und deren Aufbau</h3>
+					<ul>
+						<li>URI: Unified Ressource Locator (RFC 3986)
+						<li>Beschreibt (fast) alle Arten von Adressen: URLs, Mailto, FTP, Telefon...
+						<li>Aufbau einer URI:<br>
+						<code><small><i>Schema</i>://[<i>Benutzer</i>:<i>Passwort</i>@]Hostname[:<i>Port</i>]/<i>Pfad</i>[?<i>Query</i>][#<i>Fragment</i>]</small></code>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>URLs stellen eine Teilmenge der URIs dar
+							<li>IRIs k&ouml;nnen dasselbe wie URIs - allerdings d&uuml;rfen sie alle Unicode-Zeichen enthalten. URIs verwenden nur eine Untermenge des US-ASCII-Zeichensatzes.
+							<li>(vHost sind beispielsweise auch nur durch URIs bzw. deren Pflichtangabe im HTTP-Header m&ouml;glich.)
+							<li>Query ist weder in Fieldings Dissertation, noch im HTTP- oder URI-Standard definiert. Verwendung hat sich dennoch eingeb&uuml;rgert und ist nicht &bdquo;ge&auml;chtet&ldquo;.
+							<li>Alternativ zur Query-Schreibweise gibt es die Matrixschreibweise, welche durch Semikolon eingeleitet und separiert wird (Bsp.: .../index.html;id=5;user=donkeykong;pw=banana)
+							<li>Die Fragment-ID wird als einziger Teil der URI rein clientseitig verarbeitet (bspw. in HTML als Anker)
+							<li>Ein Nutzer sind einer URI nicht an, welcher Teil zur Identifikation der Anwendung auf dem Server verwendet wird und welcher tats&auml;chlich Daten enth&auml;lt
+						</ul>
+					</aside>
+				</section>		
+
+
+				<section>
+					<h3>Gutes und standardkonformes URI-Design (1/2)</h3>
+					<ul>
+						<li>Aufbau von Modell: URI adressiert Substantiv (Ressource), HTTP-Verb die Aktion
+						<li>Ressource im Plural (egal ob Liste oder einzelne Prim&auml;rressource)
+						<li>Hierarchien einbeziehen
+						<ul>
+							<li>&Uuml;bergeordnete Pfade sollten auch vorhanden bzw. sinnvoll sein
+						</ul>
+						<li>Filter sollten Queries verwenden
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li><code>Was? ==> HTTP-Verb<br>
+								+<br>
+								Womit? ==> Ressource
+								</code>
+						</ul>
+					</aside>
+				</section>							
+
+
+				<section>
+					<h3>Gutes und standardkonformes URI-Design (2/2)</h3>
+					<ul>
+						<li>Stabile URIs anstreben: &bdquo;Cool URIs don't change&ldquo; (Tim Berners-Lee)
+						<ul>
+							<li>&bdquo;301 redirect&ldquo;
+							<li>&bdquo;410 gone&ldquo;, im schlimmsten Fall &bdquo;404 not found&ldquo;
+						</ul>
+						<li>Robustness Principle, Postels Law
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li><code>Was? ==> HTTP-Verb<br>
+								+<br>
+								Womit? ==> Ressource
+								</code>
+							<li>Postels Law (aus dem TCP-RFC): &bdquo;Be conservative in what you do, be liberal in what you expect from others.&ldquo;
+							<li>Zwar sind Queries nirgends standardisiert, sie sind jedoch weit verbreitet und werden bspw. von HTML-Formularen verwendet. Probleme k&ouml;nnen mit Cache-Servern wie &bdquo;Squid&ldquo; auftreten, die URIs mit Queries prinzipiell nicht cachen
+						</ul>
+					</aside>
+				</section>							
+
+
+				<section>
+					<h3>Beispiele f&uuml;r URIs</h3>
+					<ul>
+						<li style="color: green;">http://example.com/crm/customers/30142<br>
+						Korrekt
+						<li style="color: red;">http://example.com/crm/30142<br>
+						Keine Hierarchie, nicht zwingend eindeutig
+						<li style="color: yellow;">http://example.com/crm/customers?id=30142<br>
+						REST konform, da eindeutig - Hierarchie fehlt jedoch
+						<li style="color: green;">http://example.com/crm/customers?plz=76149<br>
+						REST konform und eindeutig, Query fungiert hier als Filter
+						<li style="color: red;">http://example.com/crm/30142.xml<br>
+						Keine Formatangaben, Repr&auml;sentation wird durch Content Negotiation gew&auml;hlt
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>&Uuml;bersicht System</h3>
+					<img src="img/system_aufbau.png">
+					
+					<aside class="notes">
+						<ul>
+							<li>Wie gesagt: 1 Ressource pro Identifikator, n Identifikatoren pro Ressource
+						</ul>
+					</aside>
+				</section>
+
+				<!--<section>
+					<h3>Einsatz von REST</h3>
+					<ul>
+						<li>Unternehmen, deren Systeme auf REST basieren:
+							<ul>
+								<li>
+							<ul>
+						<li>Frameworks, die REST konform arbeiten:
+							<ul>
+								<li>Rails
+							<ul>							
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>
+						</ul>
+					</aside>
+				</section>-->
+
+
+				<section>
+					<h3>Weitere Informationen</h3>
+					<ul>
+						<li><a href="http://www.amazon.de/dp/B00A3VG97Y/ref=as_li_qf_sp_asin_til?tag=randomstuff-21&camp=1410&creative=6378&linkCode=as1&creativeASIN=B00A3VG97Y&adid=0DXCJ7SC0HHV0B4PBYWK&&ref-refURL=http%3A%2F%2Frest-http.info%2F">&bdquo;REST und HTTP&ldquo; von Stefan Tilkov (dpunkt.verlag, 2009)</a>
+						<li><a href="http://de.wikipedia.org/wiki/Representational_State_Transfer">REST in der Wikipedia</a>
+						<li><a href="http://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP in der Wikipedia</a>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Das Buch kann auch in der KIT-Bibliothek ausgeliehen werden.
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h1>Vielen Dank f&uuml;r Eure Aufmerksamkeit.</h1>
+					<p><a class="crypted_mail" href="florian%46loch%6584gmail%46com">Florian (dot) Loch (@) gmail (dot) com</a><br>
+					<a href="https://github.com/FlorianLoch/">@GitHub</a></p>
+					
+					<aside class="notes">
+						<ul>
+							<li>
+						</ul>
+					</aside>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: "moon", // available themes are in /css/theme
+				transition: "linear", // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
