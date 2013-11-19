@@ -7,6 +7,9 @@
     Images (or other stuff that gets loaded after first rendering) should have width and height values
     in order to work some templates that calculate dimensions of layout via JavaScript.
 
+    If no page argument is given or its value is is "" then the page "home.htm" will be loaded. If the the given page
+    cannot be fetched "404.htm" will be displayed.
+
   Florian D. Loch, 05.11.2013
 */
   var fadeDuration = 300;
