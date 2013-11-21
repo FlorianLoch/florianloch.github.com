@@ -26,9 +26,9 @@
       background: "black",
       "z-index": "1000",
       position: "fixed",
-      opacity: "0.6",
+      opacity: "1",
       top: "0",
-      left: "0",
+      left: "0"
     });
 
   	var errorPage = "404.htm";
