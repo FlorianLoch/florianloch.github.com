@@ -31,10 +31,6 @@
       left: "0",
     });
 
-    $("body").css({
-      overflow: "scroll"
-    });
-
   	var errorPage = "404.htm";
   	var errorMsg = "<p>Could not load page - could not even load error page!</p>";
 
