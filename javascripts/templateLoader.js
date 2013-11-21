@@ -16,9 +16,24 @@
   var contentID = "#CONTENT";
 
   $(document).ready(function () {
-  	$("body").css({
+/*  	$("body").css({
   		display: "none"
-  	});
+  	});*/
+
+    $("#overlay").css({
+      width: "100%",
+      height: "100%",
+      background: "black",
+      "z-index": "1000",
+      position: "fixed",
+      opacity: "0.6",
+      top: "0",
+      left: "0",
+    });
+
+    $("body").css({
+      overflow: "scroll"
+    });
 
   	var errorPage = "404.htm";
   	var errorMsg = "<p>Could not load page - could not even load error page!</p>";
@@ -66,10 +81,10 @@
 
   	//Make content visible (but not visible for humans)
   	//Without this layouting would not work in some cases
-  	$("body").css({
+/*  	$("#overlay").css({
   		display: 'block',
   		opacity: '0.1'
-  	});
+  	});*/
 
   	//Needed for some templates (that listen on the resize-event)
   	if (window.onresize != undefined) {
@@ -81,7 +96,15 @@
   	$(document).trigger("contentLoaded");
 
   	//Now make visible for humans
-  	$("body").animate({
-  		opacity: 1.0
-  	}, fadeDuration);
+    $("#overlay").animate({
+      opacity: 0.0
+    }, fadeDuration, function () {
+      $("body").css({
+        overflow: "auto"
+      });
+
+      $("#overlay").css({
+        display: "none"
+      });
+    });
   }
