@@ -40,6 +40,10 @@
 				margin-top: 20px !important;
 				border: 3px solid grey !important;
 			}
+
+			td {
+				padding: 10px !important;
+			}
 		</style>
 	</head>
 
@@ -54,7 +58,7 @@
 					<br><br>
 					<h3>Begriffe, Konzept und Best Practice</h3>
 					<p>
-						<small>Florian Loch, 18.11.2013, <a href="goo.gl/xFgXm3">goo.gl/xFgXm3</a><br><br>
+						<small>Florian Loch, 25.11.2013, <a href="goo.gl/xFgXm3">goo.gl/xFgXm3</a><br><br>
 						<br>
 						(Kommentare und weitere Informationen mit &bdquo;s&ldquo; einblenden)</small>
 					</p>
@@ -220,53 +224,182 @@
 
 
 				<section>
-					<h3>Standardmethoden (HTTP-Verben / CRUD) (1/2)</h3>
+					<h3>Standardmethoden (HTTP-Verben)</h3>
 					<ul>
-						<li>Jede Ressource &bdquo;implementiert&ldquo; alle Methoden
+						<li>&bdquo;REST APIs must be hypertext-driven&ldquo; (Roy T. Fielding)
+						<li>Eine beschr&auml;nkte, definierte Menge von Operationen, die f&uuml;r alle Ressourcen gleicherma&szlig;en gilt
+						<li>In HTTP durch die HTTP-Verben ausgepr&auml;gt:
+						<ul>
+							<li> GET (R)
+							<li> HEAD
+							<li> PUT (C, U)
+							<li> DELETE (D)
+							<li> POST (C, U)
+							<li> (TRACE, OPTIONS, LINK, UNLINK, CONNECT)
+						</ul>
 					</ul>
-					<table>
-						<tr>
-							<th>HTTP-Verb</th><th>Operation</th><th>Safe?</th>
-						</tr>
-						<tr>
-							<td>DELETE</td><td>Entfernen einer Identit&auml;t</td><td>Ja</td>
-						</tr>
-						<tr>
-							<td>GET</td><td>Abrufen von Daten einer Ressource bzw. Identit&auml;t</td><td>Ja</td>
-						</tr>
-						<tr>
-							<td>POST</td><td>Anlegen einer Identit&auml;t, starten beliebiger Operationen</td><td>Nein</td>
-						</tr>
-						<tr>
-							<td>PUT</td><td>Aktualisieren einer Identit&auml;t</td><td>Ja</td>
-						</tr>																		
-					</table>
-
 					
 					<aside class="notes">
 						<ul>
 							<li><strong>CRUD</strong>: Create, Read, Update, Delete
-							<li>Jede Ressource implementiert jede Methode; dass gibt Sicherheit wie in OO-Programmierung die Implementierung eines Interfaces.
-							<li>Daneben gibt es noch die HTTP-Verben HEAD, TRACE, CONNECT und OPTIONS, diese sind jedoch f&uuml;r REST nur von geringer Bedeutung.
-							<li>&bdquo;Safe&ldquo; meint, dass die Methoden idempotent sind, d. h., dass ein (versehentlich) mehrfacher Aufruf keine Folgen hat
+							<li>Die nachfolgend beschriebenen Verben wurde mit Ausnahme von OPTIONS und CONNECT bereits mit HTTP 1.0 eingef&uuml;hrt. Die anderen beiden mit Version 1.1
+							<li>Es lassen sich auch eigene Verben definieren, davon ist allerdings stark abzuraten!!!
 						</ul>
 					</aside>
-				</section>
+				</section>	
 
 
 				<section>
-					<h3>Standardmethoden (HTTP-Verben / CRUD) (2/2)</h3>
+					<h3>HTTP GET</h3>
 					<ul>
-						<li>Bei PUT sollten korrekterweise <i>alle</i> Daten gesendet werden; in der Praxis jedoch eher un&uuml;blich
-						<li>Aufrufe von PUT, POST liefern Antwort mit entsprechendem HTTP-Status (200 bzw. 201) und den kompletten Daten der erstellten/ge&auml;nderten Indentit&auml;t (wie bei GET)
+						<li>Abholen der Ressource als Entit&auml;t, sprich als Repr&auml;sentation
+						<li>Darf entgegen Meinung vieler durchaus Seiteneffekte haben, allerdings keine den Status &auml;ndernde
+						<li>Daher: Keine Anweisungen wie L&ouml;schen etc. mit GET tunneln!
+						<li>Am meisten genutztes HTTP-Verb, daher viele Optimierungen f&uuml;r GET vorhanden (bspw. &bdquo;Conditional Header&ldquo;)
+						<li><code>GET /products/341 HTTP/1.1<br>Host: www.example.com</code>
+						<li><code style="color: red;">GET /vendors/4711?action=delete HTTP/1.1<br>Host: www.example.com</code>
 					</ul>
-
 					
 					<aside class="notes">
 						<ul>
+							<li>Ein Log-Eintrag als Seiteneffekt w&auml;re in Ordnung, eine Ver&auml;nderung des Status (bspw. "bestellt") darf nicht erfolgen.
+							<li>Findet ein Crawler eine URI, so geht er davon aus, dass er ihr problemlos folgen darf. Jedes Verfolgen eines Hyperlinks hat einen GET-Request zur Folge, deswegen d&uuml;rfen hier keine Anweisungen bspw. zum L&ouml;schen von Entit&auml;ten enthalten sein.
+							<li>Ein &bdquo;Conditional Header&ldquo; ist bspw. der &bdquo;if modified since&ldquo;-Header, der bewirkt, dass nur dann Daten versendet werden, wenn die Bedingung erf&uuml;llt ist. Hat der Client eine noch g&uuml;ltige Version im Cache, so zieht er diese dann vor. 
+						</ul>
+					</aside>
+				</section>	
+
+
+				<section>
+					<h3>HTTP HEAD</h3>
+					<ul>
+						<li>Eng verwandt mir GET
+						<li>Liefert nur Metadata zur&uuml;ck, keine Inhalte
+						<li><code>HEAD /attachments/1818 HTTP/1.0<br>Host: example.com</code><br><br>
+						<code>Accept-Ranges: bytes<br>
+						Content-Type: text/html<br>Date: Sun, 24 Nov 2013 22:04:53 GMT<br>...<br>
+						Content-Length: 1270</code>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Bspw. dann n&uuml;tzlich, wenn vor einem Donwload die Dateigr&ouml;&szlig;e angezeigt werden soll - ohne insgeheim schon mit dem Download zu beginnen
+						</ul>
+					</aside>
+				</section>					
+
+
+				<section>
+					<h3>HTTP PUT</h3>
+					<ul>
+						<li>Muss nicht zwingend an Skript/Anwendung weitergereicht werden, kann von Server direkt als Upload an die besagte URI interpretiert werden
+						<li>Nach Spezifikation: Aktualisiert bzw. erstellt Ressource an angegebener Stelle
+						<li><code>PUT /neu.html HTTP/1.1<br>Host: example.com<br>Accept: text/plain<br>Content-type: text/plain<br>Content-length: 22<br><br>Inhalt der neuen Datei</code>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Genauso wie DELETE erst ab HTML5 ver&uuml;gbar. Kann dort in Formularen via dem Attribut &bdquo;formmethod&ldquo; verwendet werden
+							<li>Da es eine enorme Sicherheitsl&uuml;cke darstellen w&uuml;rde, wenn Unbefugte einfach Dateien via PUT auf einen Server laden k&ouml;nnten, ist dieses Verb meist deaktiviert bzw. wird von den Servern nicht verarbeitet
 						</ul>
 					</aside>
 				</section>				
+
+
+				<section>
+					<h3>HTTP DELETE</h3>
+					<ul>
+						<li>L&ouml;schen einer Ressource
+						<li>Nur logisches L&ouml;schen
+						<li><code>DELETE /orders/123456 HTTP/1.1<br>Host: www.example.com</code>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Logisches L&ouml;schen meint, dass dem Server &uuml;berlassen bleibt, ob er die Ressource tats&auml;chlich aus der Datenbank entfernt, oder ob er nur ein Flag in dieser setzt (bspw. &bdquo;Bestellung storniert&ldquo;)
+						</ul>
+					</aside>
+				</section>	
+
+
+				<section>
+					<h3>HTTP POST (1/2)</h3>
+					<ul>
+						<li>Unsicherstes Verb, da am ungenauesten spezifiziert
+						<li>Im engeren Sinne: Anlegen einer Entit&auml;t durch die via URI angegebene Ressource. Adresse der neuen Ressource bestimmt der Server (anders als bei PUT)
+						<li>Liefert bei Erfolg entsprechenden Code (200, 201) und GET der neuen Ressource
+						<li>Wird f&uuml;r alle anderen F&auml;lle verwendet, f&uuml;r die kein anderes Verb passt
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+							<li>Der Nachteil der ungenauen Spezifikation ist der, dass der Client keine Sicherheiten bzgl. der Funktionsweise einzelner Anfragen hat.
+						</ul>
+					</aside>
+				</section>	
+
+
+				<section>
+					<h3>HTTP POST (2/2)</h3>
+					<ul>
+						<li><code>POST /customers HTTP/1.1<br>Host: example.com<br>Accept: text/plain, text/xml<br>Content-type: application/x-www-form-urlencoded<br>Content-length: 27<br>Connection: close<br><br>vorname=Max&name=Mustermann</code>
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+
+						</ul>
+					</aside>
+				</section>					
+
+
+				<section>
+					<h3>HTTP OPTIONS, TRACE</h3>
+					<ul>
+						<li>OPTIONS: Liefert Informationen, welche Verben zul&auml;ssig sind<br>
+						<code>OPTIONS / HTTP/1.1<br>Host: www.example.com</code><br><br>
+						<code>Allow: OPTIONS, GET, HEAD, POST<br>Cache-Control: max-age=604800<br>Date: Sun, 24 Nov 2013 21:53:50 GMT<br>Expires: Sun, 01 Dec 2013 21:53:50 GMT<br>Content-Length: 0</code>
+						<li>TRACE: Server sendet den empfangenen Request im Original zur&uuml;ck, jeder zwischengeschaltete HTTP-Proxy muss sich als &bdquo;via&ldquo; vermerken. Kaum verbreitet.
+					</ul>
+					
+					<aside class="notes">
+						<ul>
+
+						</ul>
+					</aside>
+				</section>	
+
+
+				<section>
+					<h3>&Uuml;bersicht der HTTP-Verben</h3>
+					<table>
+						<tr>
+							<th>HTTP-Verb</th><th>Sicher</th><th>Idempotent</th><th>Identifizierbare Ressource</th><th>Cache-f&auml;hig</th><th>Sichtbare Semantik</th></tr>
+						</tr>
+						<tr>
+							<td>GET & HEAD</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td>
+						</tr>	
+						<tr>
+							<td>PUT</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Ja</td>
+						</tr>																	
+						<tr>
+							<td>DELETE</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Ja</td>
+						</tr>
+						<tr>
+							<td>POST</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td>
+						</tr>			
+						<tr>
+							<td>OPTIONS</td><td>Ja</td><td>Ja</td><td>Nein</td><td>M&ouml;glich</td><td>Ja</td>
+						</tr>																						
+					</table>
+					
+					<aside class="notes">
+						<ul>
+							<li>Sicher: Der Aufruf hat keine unerw&uuml;nschten Seiteneffekte
+							<li>Idempotent: Ein wiederholter Aufruf im Zweifelsfall ist problemlos m&ouml;glich und bleibt ohne Folgen
+						</ul>
+					</aside>
+				</section>	
 
 
 				<section>
@@ -441,20 +574,25 @@
 						<li><a href="http://www.amazon.de/dp/B00A3VG97Y/ref=as_li_qf_sp_asin_til?tag=randomstuff-21&camp=1410&creative=6378&linkCode=as1&creativeASIN=B00A3VG97Y&adid=0DXCJ7SC0HHV0B4PBYWK&&ref-refURL=http%3A%2F%2Frest-http.info%2F">&bdquo;REST und HTTP&ldquo; von Stefan Tilkov (dpunkt.verlag, 2009)</a>
 						<li><a href="http://de.wikipedia.org/wiki/Representational_State_Transfer">REST in der Wikipedia</a>
 						<li><a href="http://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP in der Wikipedia</a>
+						<li><a href="http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven">&bdquo;REST APIs must be hypertext-driven&ldquo;</a>
+						<li><a href="http://groups.yahoo.com/neo/groups/rest-discuss/conversations/topics/4732">Roy Fielding on Yahoo! Groups</a>
+						<li><a href="http://www.html-world.de/program/http_3.php">Beispiele f&uuml;r HTTP Anfragen auf html-world.de</a>
+						<li><a href="http://html5doctor.com/html5-forms-introduction-and-new-attributes/">PUT und DELETE in HTML5</a>
 					</ul>
 					
 					<aside class="notes">
 						<ul>
-							<li>Das Buch kann auch in der KIT-Bibliothek ausgeliehen werden.
+							<li>Das erw&auml;hnte Buch von Stefan Tilkov kann auch in der KIT-Bibliothek ausgeliehen werden.
 						</ul>
 					</aside>
 				</section>
 
 
 				<section>
-					<h1>Vielen Dank f&uuml;r Eure Aufmerksamkeit.</h1>
+					<h1>Vielen Dank f&uuml;r die Aufmerksamkeit.</h1>
 					<p><a class="crypted_mail" href="florian%46loch%6584gmail%46com">Florian (dot) Loch (@) gmail (dot) com</a><br>
-					<a href="https://github.com/FlorianLoch/">@GitHub</a></p>
+					<a href="https://github.com/FlorianLoch/">@GitHub</a><br>
+					<a href="http://fdloch.net">Meine Entwicklerpage</a></p>
 					
 					<aside class="notes">
 						<ul>
@@ -479,7 +617,7 @@
 				history: true,
 				center: true,
 
-				theme: "moon", // available themes are in /css/theme
+				theme: "default", // available themes are in /css/theme
 				transition: "default", // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
