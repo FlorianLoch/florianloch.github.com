@@ -4,7 +4,6 @@
 //Needs jQuery to work
 $(document).on("contentLoaded", function () {
 	decryptMailAdresses();
-	console.log("T;");
 });
 
 function decryptMailAdresses() {

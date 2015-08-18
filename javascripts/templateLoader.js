@@ -47,6 +47,12 @@
 
   	console.log(page);
 
+    if (page.indexOf("/") > -1 || page.indexOf("\\") > -1 || page.indexOf("javascript:") > -1) { //Prevents attacks like loading content from foreign server and execution of code via something like: data:text/html,<script>alert(0)</script>
+                                                                                                 //Chrome (or jQuery) transforms \ automatically into /...
+      console.log("unsafe page parameter detected!");
+      page = errorPage;
+    }
+
   	$.ajax({
   		url: page,
   		type: "GET",
@@ -58,7 +64,7 @@
   				$.ajax({
   					url: errorPage,
   					type: "GET",
-  					complete: function (jQXHR, sStatus) {					
+  					complete: function (jQXHR, sStatus) {
   						if (sStatus == "success") {
   							loadContentInBody(jQXHR.responseText);
   						}
