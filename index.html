@@ -6,9 +6,15 @@
   	<meta http-equiv="X-UA-Compatible" content="chrome=1">
   	<title>Florian Loch@GitHub</title>
   	<link rel="stylesheet" href="stylesheets/styles.css">
-  	<link rel="stylesheet" href="stylesheets/pygment_trac.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  	<script src="javascripts/main.js"></script>
+		<link rel="stylesheet" href="stylesheets/pygment_trac.css">
+		<script type="text/javascript">
+			// custom forwarding for cv.fdlo.ch subdomain
+			if (window.location.hostname === "cv.fdlo.ch") {
+				window.location.href = "./cv/index-en.html";
+			}
+		</script>
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  	<script type="text/javascript" src="javascripts/main.js"></script>
   	<script type="text/javascript" src="javascripts/decryptMailAdresses.js"></script>
   	<script type="text/javascript" src="javascripts/templateLoader.js"></script>
     <!--[if lt IE 9]>
@@ -17,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
   </head>
   <body>
-    <div id="overlay"></div>  	
+    <div id="overlay"></div>
     	<header>
     		<h1>FL @ DEV</h1>
     		<p>Entwicklerpage von Florian Loch</p>
