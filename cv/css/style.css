@@ -66,6 +66,7 @@ body {
   background: url("../img/dark_embroidery.png") repeat;
   padding: 0;
   margin: 0;
+  min-width: 210mm;
 }
 
 .print-hint {
@@ -111,7 +112,7 @@ body {
   page-break-inside: avoid;
 }
 .section ~ .section {
-  padding-top: 8mm;
+  padding-top: 6mm;
 }
 .section .section-icon {
   border-radius: 100%;
@@ -363,7 +364,9 @@ body {
 
 @media print {
   .wrapper {
-    height: calc(297mm * 2 - 10mm - 20mm - 3mm - 1mm) !important;
+    height: calc(297mm * 2 - 20mm) !important;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
   }
 
   .print-hint {
