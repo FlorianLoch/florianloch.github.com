@@ -1,4 +1,4 @@
 florianloch.github.com
 ======================
 
-Florians GitHub-based Blog
+Florian's GitHub-based Blog. Nothing too fancy.
