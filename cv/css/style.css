@@ -395,6 +395,10 @@ body {
   .made-with {
     display: none !important;
   }
+
+  .print-fix {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
