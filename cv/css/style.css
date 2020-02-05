@@ -63,9 +63,6 @@ table {
 }
 
 body {
-  background: url("../img/dark_embroidery.png") repeat;
-  padding: 0;
-  margin: 0;
   min-width: 210mm;
 }
 
@@ -90,6 +87,11 @@ body {
 .lang-panel .flag {
   height: 23px;
   width: 35px;
+}
+
+.outer-wrapper {
+  background: url("../img/dark_embroidery.png") repeat;
+  width: 100%;
 }
 
 .wrapper {
@@ -282,6 +284,7 @@ body {
   float: left;
 }
 .header .image img {
+  border-radius: 2mm;
   width: 35mm;
 }
 .header .name {
@@ -363,8 +366,11 @@ body {
 }
 
 @media print {
+  .outer-wrapper {
+    -webkit-print-color-adjust: exact;
+  }
+
   .wrapper {
-    height: calc(297mm * 2 - 20mm) !important;
     margin-bottom: 0px;
     padding-bottom: 0px;
   }
