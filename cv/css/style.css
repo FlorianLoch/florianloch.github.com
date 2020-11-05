@@ -30,41 +30,39 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline;
-}
+  vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block;
-}
+  display: block; }
 
 body {
-  line-height: 1.1;
-}
+  line-height: 1.1; }
 
 ol, ul {
-  list-style: none;
-}
+  list-style: none; }
 
 blockquote, q {
-  quotes: none;
-}
+  quotes: none; }
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: "";
-  content: none;
-}
+  content: '';
+  content: none; }
 
 table {
   border-collapse: collapse;
-  border-spacing: 0;
-}
+  border-spacing: 0; }
+
+#emailAddress::before {
+  content: "me@"; }
+
+#emailAddress::after {
+  content: "fdlo.ch"; }
 
 body {
-  min-width: 210mm;
-}
+  min-width: 210mm; }
 
 .print-hint {
   text-align: center;
@@ -72,27 +70,22 @@ body {
   background: #FFF4C2;
   color: #373737;
   width: calc(100% - 40px);
-  padding: 20px;
-}
+  padding: 20px; }
 
 .lang-panel {
   background: #FFF4C2;
   width: calc(100% - 10px);
-  padding: 5px;
-}
-.lang-panel .lang {
-  float: right;
-  margin-right: 10px;
-}
-.lang-panel .flag {
-  height: 23px;
-  width: 35px;
-}
+  padding: 5px; }
+  .lang-panel .lang {
+    float: right;
+    margin-right: 10px; }
+  .lang-panel .flag {
+    height: 23px;
+    width: 35px; }
 
 .outer-wrapper {
   background: url("../img/dark_embroidery.png") repeat;
-  width: 100%;
-}
+  width: 100%; }
 
 .wrapper {
   display: grid;
@@ -104,169 +97,146 @@ body {
   width: 210mm;
   margin: 0px auto;
   margin-top: 5mm;
-  margin-bottom: 15mm;
-}
+  margin-bottom: 15mm; }
 
 @page {
-  padding: 20mm !important;
-}
+  padding: 20mm !important; }
+
 .section {
-  page-break-inside: avoid;
-}
-.section ~ .section {
-  padding-top: 6mm;
-}
-.section .section-icon {
-  border-radius: 100%;
-  background: #009AC8;
-  text-align: center;
-  vertical-align: middle;
-  width: 10mm;
-  height: 10mm;
-  line-height: 10mm;
-  color: white;
-  float: left;
-}
-.section .section-title {
-  font-family: "Raleway";
-  font-size: 12pt;
-  font-weight: 600;
-}
-.section .section-content {
-  font-family: "Crimson Text";
-  font-size: 11pt;
-  margin-left: 12mm;
-  padding-top: 2mm;
-}
-.section .section-content .section-entry {
-  padding-top: 3mm;
-}
-.section .section-content .section-entry .bar {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-}
-.section .section-content .section-entry .filled-bar-100 {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 98% !important;
-  background: #009AC8 !important;
-  margin-top: 0;
-}
-.section .section-content .section-entry .filled-bar-90 {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 90% !important;
-  background: #009AC8 !important;
-  margin-top: 0;
-}
-.section .section-content .section-entry .filled-bar-80 {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 80% !important;
-  background: #009AC8 !important;
-  margin-top: 0;
-}
-.section .section-content .section-entry .filled-bar-70 {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 70% !important;
-  background: #009AC8 !important;
-  margin-top: 0;
-}
-.section .section-content .section-entry .filled-bar-60 {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 60% !important;
-  background: #009AC8 !important;
-  margin-top: 0;
-}
-.section .section-content .section-entry .filled-bar-20 {
-  margin-top: 2mm;
-  width: 100%;
-  border-radius: 3mm;
-  background: white;
-  height: 3mm;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 20% !important;
-  background: #009AC8 !important;
-  margin-top: 0;
-}
-.section .section-content .section-entry .section-entry-date {
-  color: #747474;
-}
-.section .section-content .section-entry .section-entry-title {
-  font-family: "Raleway";
-  padding-bottom: 1mm;
-  font-weight: 600;
-}
-.section .section-content .section-entry .section-entry-title::before {
-  content: "» ";
-  color: #009AC8;
-  font-family: "Raleway";
-  padding-bottom: 1mm;
-  font-weight: 600;
-}
-.section .section-content .section-entry .section-entry-location {
-  margin-right: 5mm;
-}
-.section .section-content .section-entry .section-entry-location ~ .section-entry-content {
-  padding-top: 1mm;
-}
-.section .section-content .section-entry .section-entry-content {
-  color: #373737;
-  line-height: 1.1;
-}
-.section .section-content .section-entry .section-entry-content ul {
-  margin-left: 5mm;
-  margin-bottom: 2mm;
-  list-style-type: none;
-}
-.section .section-content .section-entry .section-entry-content ul li {
-  padding-left: 0.7mm;
-  text-indent: -0.9em;
-}
-.section .section-content .section-entry .section-entry-content ul li::before {
-  content: "•";
-  padding-right: 2mm;
-  font-size: 14pt;
-  color: #009AC8;
-  /* or whatever color you prefer */
-}
+  page-break-inside: avoid; }
+  .section ~ .section {
+    padding-top: 6mm; }
+  .section .section-icon {
+    border-radius: 100%;
+    background: #009AC8;
+    text-align: center;
+    vertical-align: middle;
+    width: 10mm;
+    height: 10mm;
+    line-height: 10mm;
+    color: white;
+    float: left; }
+  .section .section-title {
+    font-family: "Raleway";
+    font-size: 12pt;
+    font-weight: 600; }
+  .section .section-content {
+    font-family: "Crimson Text";
+    font-size: 11pt;
+    margin-left: 12mm;
+    padding-top: 2mm; }
+    .section .section-content .section-entry {
+      padding-top: 3mm; }
+      .section .section-content .section-entry .bar {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm; }
+      .section .section-content .section-entry .filled-bar-100 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 98% !important;
+        background: #009AC8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-90 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 90% !important;
+        background: #009AC8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-80 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 80% !important;
+        background: #009AC8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-70 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 70% !important;
+        background: #009AC8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-60 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 60% !important;
+        background: #009AC8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-20 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 20% !important;
+        background: #009AC8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .section-entry-date {
+        color: #747474; }
+      .section .section-content .section-entry .section-entry-title {
+        font-family: "Raleway";
+        padding-bottom: 1mm;
+        font-weight: 600; }
+      .section .section-content .section-entry .section-entry-title::before {
+        content: "» ";
+        color: #009AC8;
+        font-family: "Raleway";
+        padding-bottom: 1mm;
+        font-weight: 600; }
+      .section .section-content .section-entry .section-entry-location {
+        margin-right: 5mm; }
+      .section .section-content .section-entry .section-entry-location ~ .section-entry-content {
+        padding-top: 1mm; }
+      .section .section-content .section-entry .section-entry-content {
+        color: #373737;
+        line-height: 1.1; }
+        .section .section-content .section-entry .section-entry-content ul {
+          margin-left: 5mm;
+          margin-bottom: 2mm;
+          list-style-type: none; }
+          .section .section-content .section-entry .section-entry-content ul li {
+            padding-left: 0.7mm;
+            text-indent: -0.9em; }
+          .section .section-content .section-entry .section-entry-content ul li::before {
+            content: "\2022";
+            padding-right: 2mm;
+            font-size: 14pt;
+            color: #009AC8;
+            /* or whatever color you prefer */ }
 
 .header {
   padding: 5mm;
@@ -278,35 +248,28 @@ body {
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 1;
-  grid-column-end: 2;
-}
-.header .image {
-  float: left;
-}
-.header .image img {
-  border-radius: 2mm;
-  width: 35mm;
-}
-.header .name {
-  margin-left: 40mm;
-  margin-top: 23mm;
-}
-.header .name .name-upper {
-  font-family: "Raleway", sans-serif;
-  font-size: 30pt;
-  padding-bottom: 3mm;
-  border-bottom: solid 1px #009AC8;
-  color: #009AC8;
-}
-.header .name .name-lower {
-  margin-top: 4mm;
-  font-size: 14pt;
-  font-family: "Crimson Text", serif;
-}
+  grid-column-end: 2; }
+  .header .image {
+    float: left; }
+    .header .image img {
+      border-radius: 2mm;
+      width: 35mm; }
+  .header .name {
+    margin-left: 40mm;
+    margin-top: 23mm; }
+    .header .name .name-upper {
+      font-family: "Raleway", sans-serif;
+      font-size: 30pt;
+      padding-bottom: 3mm;
+      border-bottom: solid 1px #009AC8;
+      color: #009AC8; }
+    .header .name .name-lower {
+      margin-top: 4mm;
+      font-size: 14pt;
+      font-family: "Crimson Text", serif; }
 
 .clear {
-  clear: both;
-}
+  clear: both; }
 
 .main {
   padding: 5mm;
@@ -318,8 +281,7 @@ body {
   grid-column-start: 1;
   grid-column-end: 2;
   padding-bottom: 20mm;
-  padding-top: 20mm !important;
-}
+  padding-top: 20mm !important; }
 
 .side {
   padding: 5mm;
@@ -331,8 +293,7 @@ body {
   grid-column-start: 2;
   grid-column-end: 3;
   padding-left: 5mm !important;
-  padding-right: 10mm !important;
-}
+  padding-right: 10mm !important; }
 
 .footer {
   padding: 5mm;
@@ -349,56 +310,35 @@ body {
   font-size: 9pt;
   color: #747474;
   line-height: 1.5;
-  text-align: center;
-}
-.footer i {
-  margin-right: 1mm;
-  margin-left: 6mm;
-}
-.footer .made-with {
-  margin-top: 2mm;
-  font-family: "Raleway";
-  color: #C7C7C7;
-}
-.footer a {
-  color: #747474;
-  text-decoration: none;
-}
+  text-align: center; }
+  .footer i {
+    margin-right: 1mm;
+    margin-left: 6mm; }
+  .footer .made-with {
+    margin-top: 2mm;
+    font-family: "Raleway";
+    color: #C7C7C7; }
+  .footer a {
+    color: #747474;
+    text-decoration: none; }
 
 @media print {
   .outer-wrapper {
-    -webkit-print-color-adjust: exact;
-  }
-
+    -webkit-print-color-adjust: exact; }
   .wrapper {
     margin-bottom: 0px;
-    padding-bottom: 0px;
-  }
-
+    padding-bottom: 0px; }
   .print-hint {
-    display: none;
-  }
-
+    display: none; }
   .lang-panel {
-    display: none;
-  }
-}
+    display: none; } }
+
 @media screen {
   .wrapper {
-    border-radius: 2mm;
-  }
-
+    border-radius: 2mm; }
   .footer {
-    padding: 5mm !important;
-  }
-
+    padding: 5mm !important; }
   .made-with {
-    display: none !important;
-  }
-
+    display: none !important; }
   .print-fix {
-    display: none;
-  }
-}
-
-/*# sourceMappingURL=style.css.map */
+    display: none; } }
