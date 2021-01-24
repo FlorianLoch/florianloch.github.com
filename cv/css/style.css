@@ -151,7 +151,19 @@ body {
         position: relative;
         top: 0;
         left: 0;
-        width: 98% !important;
+        width: 100% !important;
+        background: #0E6BA8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-98 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100% !important;
         background: #0E6BA8 !important;
         margin-top: 0; }
       .section .section-content .section-entry .filled-bar-90 {
@@ -202,18 +214,6 @@ body {
         width: 70% !important;
         background: #0E6BA8 !important;
         margin-top: 0; }
-      .section .section-content .section-entry .filled-bar-60 {
-        margin-top: 2mm;
-        width: 100%;
-        border-radius: 3mm;
-        background: white;
-        height: 3mm;
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 60% !important;
-        background: #0E6BA8 !important;
-        margin-top: 0; }
       .section .section-content .section-entry .filled-bar-50 {
         margin-top: 2mm;
         width: 100%;
@@ -257,6 +257,8 @@ body {
       .section .section-content .section-entry .section-entry-content {
         color: #252525;
         line-height: 1.1; }
+        .section .section-content .section-entry .section-entry-content a {
+          color: #252525; }
         .section .section-content .section-entry .section-entry-content ul {
           margin-left: 5mm;
           margin-bottom: 2mm;
@@ -289,13 +291,13 @@ body {
       width: 35mm; }
   .header .name {
     margin-left: 40mm;
-    margin-top: 23mm; }
+    margin-top: 18mm; }
     .header .name .name-upper {
       font-family: "Raleway", sans-serif;
       font-size: 30pt;
       padding-bottom: 3mm;
       border-bottom: solid 1px #A63C06;
-      color: #A63C06; }
+      color: #353535; }
     .header .name .name-lower {
       margin-top: 4mm;
       font-size: 14pt;
@@ -327,6 +329,8 @@ body {
   grid-column-end: 3;
   padding-left: 5mm !important;
   padding-right: 10mm !important; }
+  .side .section-content .section-entry {
+    padding-top: 5mm; }
 
 .footer {
   padding: 5mm;
