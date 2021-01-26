@@ -257,6 +257,11 @@ body {
       .section .section-content .section-entry .section-entry-content {
         color: #252525;
         line-height: 1.1; }
+        .section .section-content .section-entry .section-entry-content i.fa {
+          margin-right: 5mm;
+          width: 5mm; }
+        .section .section-content .section-entry .section-entry-content + .section-entry-content {
+          margin-top: 1mm; }
         .section .section-content .section-entry .section-entry-content a {
           color: #252525; }
         .section .section-content .section-entry .section-entry-content ul {
