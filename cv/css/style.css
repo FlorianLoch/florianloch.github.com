@@ -2451,6 +2451,30 @@ body {
         width: 50% !important;
         background: #0E6BA8 !important;
         margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-40 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 40% !important;
+        background: #0E6BA8 !important;
+        margin-top: 0; }
+      .section .section-content .section-entry .filled-bar-30 {
+        margin-top: 2mm;
+        width: 100%;
+        border-radius: 3mm;
+        background: white;
+        height: 3mm;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 30% !important;
+        background: #0E6BA8 !important;
+        margin-top: 0; }
       .section .section-content .section-entry .filled-bar-20 {
         margin-top: 2mm;
         width: 100%;
@@ -2482,6 +2506,11 @@ body {
       .section .section-content .section-entry .section-entry-content {
         color: #252525;
         line-height: 1.1; }
+        .section .section-content .section-entry .section-entry-content i.fa {
+          margin-right: 5mm;
+          width: 5mm; }
+        .section .section-content .section-entry .section-entry-content + .section-entry-content {
+          margin-top: 1mm; }
         .section .section-content .section-entry .section-entry-content a {
           color: #252525; }
         .section .section-content .section-entry .section-entry-content ul {
